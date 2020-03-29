@@ -1,0 +1,4 @@
+npm install celebrate
+npm install jest
+npm install cross-env
+npm install supertest
