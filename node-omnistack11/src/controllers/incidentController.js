@@ -19,13 +19,15 @@ module.exports = {
 
     async list(request, response) {
 
+        console.log(request.query);
+
         const { page = 1 } = request.query;
 
         // const  count = await connection('incidents').count()[0]; mesma coisa com a linha de baixo
         const [ count ] = await connection('incidents').count();
 
         const result = await connection('incidents')
-        .join('ongs', 'ong_id', '=', 'incidents.ong_id')
+        .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
         .limit(5)
         .offset( (page -1 ) * 5 )
         .select(['incidents.*', 'ongs.name', 'ongs.email', 'ongs.whatsapp', 'ongs.city', 'ongs.uf']);
